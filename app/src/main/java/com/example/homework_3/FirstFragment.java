@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,8 +53,14 @@ public class FirstFragment extends Fragment {
 
 
         floatingActionButton.setOnClickListener(v -> {
-            NavController navController = Navigation.findNavController(requireActivity(),R.id.nav_host_fragment);
-            navController.navigate(R.id.secondFragment);
+
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            SecondFragment transaction = new SecondFragment();
+            ft.replace(R.id.fr_container,transaction);
+            ft.commit();
+
+//            NavController navController = Navigation.findNavController(requireActivity(),R.id.nav_host_fragment);
+//            navController.navigate(R.id.secondFragment);
         });
 
         getParentFragmentManager().setFragmentResultListener("rk_task", getViewLifecycleOwner(), new FragmentResultListener() {

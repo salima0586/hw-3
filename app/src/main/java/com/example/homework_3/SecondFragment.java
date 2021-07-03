@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -43,8 +44,13 @@ public class SecondFragment extends Fragment {
                 bundle.putString("text1",text2);
                 getParentFragmentManager().setFragmentResult("rk_task",bundle);
 
-                NavController navController = Navigation.findNavController(requireActivity(),R.id.nav_host_fragment);
-                navController.navigateUp();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                FirstFragment transaction = new FirstFragment();
+                ft.replace(R.id.fr_container,transaction);
+                ft.commit();
+
+//                NavController navController = Navigation.findNavController(requireActivity(),R.id.nav_host_fragment);
+//                navController.navigateUp();
             }
         });
     }
